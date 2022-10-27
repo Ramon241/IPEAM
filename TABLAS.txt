@@ -1,1 +1,189 @@
-# IPEAM
+CREATE DATABASE IPEAM;
+USE IPEAM;
+
+CREATE TABLE Aescolar
+(
+Aescolar VARCHAR(9) NOT NULL PRIMARY KEY
+);
+
+CREATE TABLE Alumnos
+(
+IDAlumno VARCHAR(30) NOT NULL PRIMARY KEY,
+Aescolar VARCHAR(9) NOT NULL, /*FK*/
+IDCurso INT NOT NULL, /*FK*/
+Numero INT NOT NULL, /* CK>0 */
+Apellido1 VARCHAR(20) NOT NULL,
+Apellido2 VARCHAR(20) NOT NULL,
+Nombre VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE Asignaturas
+(
+IDAsignatura INT AUTO_INCREMENT PRIMARY KEY,
+Asignatura VARCHAR(40) NOT NULL,
+Tipo VARCHAR(10) NOT NULL, /*CHK (ACADEMICA O TECNICA)*/
+IDGrado INT NOT NULL, /*FK*/
+IDSeccion INT NOT NULL /*FK*/
+);
+
+CREATE TABLE Calificaciones_1er_Ciclo
+(
+IDCalificacion INT AUTO_INCREMENT PRIMARY KEY,
+IDAlumno VARCHAR(30) NOT NULL, /*FK*/
+Aescolar VARCHAR(9) NOT NULL, /*FK*/
+IDCurso INT NOT NULL, /*FK*/
+IDAsignatura INT NOT NULL, /*FK*/
+N1 INT NOT NULL, /*CHK (>0)*/
+N2 INT NOT NULL, /*CHK (>0)*/
+N3 INT NOT NULL, /*CHK (>0)*/
+N4 INT NOT NULL, /*CHK (>0)*/
+Promedio int AS (round((N1 + N2 + N3 + N4) / (4),0)),
+Asistencia INT,
+CPC DECIMAL(3,3) NOT NULL,
+CC INT AS (round(((Promedio * 0.50) + (CPC * 0.50)),0)),
+CPEX DECIMAL(3,3) NOT NULL,
+CEX INT AS (round(((Promedio * 0.30) + (CPEX * 0.70)),0))
+);
+
+CREATE TABLE Calificaciones_2do_Ciclo_Acad
+(
+IDCalificacion INT AUTO_INCREMENT PRIMARY KEY,
+IDAlumno VARCHAR(30) NOT NULL, /*FK*/
+Aescolar VARCHAR(9) NOT NULL, /*FK*/
+IDCurso INT NOT NULL, /*FK*/
+IDAsignatura INT NOT NULL, /*FK*/
+N1 INT NOT NULL, /*CHK (>0)*/
+N2 INT NOT NULL, /*CHK (>0)*/
+N3 INT NOT NULL, /*CHK (>0)*/
+N4 INT NOT NULL, /*CHK (>0)*/
+Promedio int AS (round((N1 + N2 + N3 + N4) / (4) ,0)),
+Asistencia INT,
+CPC DECIMAL(3,3) NOT NULL,
+CC INT AS (round(((Promedio * 0.50) + (CPC * 0.50)),0)),
+CPEX DECIMAL(3,3) NOT NULL,
+CEX INT AS (round(((Promedio * 0.30) + (CPEX * 0.70)),0))
+);
+
+CREATE TABLE Calificaciones_2do_Ciclo_Tec
+(
+IDCalificacion INT AUTO_INCREMENT PRIMARY KEY,
+IDAlumno VARCHAR(30) NOT NULL, /*FK*/
+Aescolar VARCHAR(9) NOT NULL, /*FK*/
+IDCurso INT NOT NULL, /*FK*/
+IDAsignatura INT NOT NULL, /*FK*/
+VxU1 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA1 INT NOT NULL,
+GCE1 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU2 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA2 INT NOT NULL,
+GCE2 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU3 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA3 INT NOT NULL,
+GCE3 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU4 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA4 INT NOT NULL,
+GCE4 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU5 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA5 INT NOT NULL,
+GCE5 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU6 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA6 INT NOT NULL,
+GCE6 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU7 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA7 INT NOT NULL,
+GCE7 VARCHAR(1), /*CHK ('G','C','E')*/
+VxU8 DOUBLE NOT NULL, /*CHK ( VxU = 100 )*/
+RA8 INT NOT NULL,
+GCE8 VARCHAR(1), /*CHK ('G','C','E')*/
+GCEG VARCHAR(1) /*CHK ('G','C','E')*/
+);
+
+CREATE TABLE Cursos
+(
+IDCurso INT AUTO_INCREMENT PRIMARY KEY,
+Aescolar VARCHAR(9) NOT NULL, /*FK*/
+Grado VARCHAR(3) NOT NULL, /*FK*/
+Seccion VARCHAR(60) NOT NULL, /*FK*/
+Curso VARCHAR(63) AS (Concat_ws(' ',Grado,'De',Seccion))
+);
+
+CREATE TABLE Grados
+(
+IDGrado INT AUTO_INCREMENT PRIMARY KEY,
+Grado VARCHAR(3) NOT NULL
+);
+
+CREATE TABLE Historial
+(
+IDHistorial INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+Usuario VARCHAR(90) NOT NULL,
+Fecha DATETIME NOT NULL,
+Accion VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE Inscripcion
+(
+IDAlumno VARCHAR(30) NOT NULL PRIMARY KEY, /*FK*/
+Aescolar VARCHAR(9) NOT NULL, /*FK*/
+Fechaing DATE NOT NULL,
+Nivel VARCHAR(10) NOT NULL,
+IDGrado INT NOT NULL, /*FK*/
+IDSeccion INT NOT NULL, /*FK*/
+Apellido1 VARCHAR(20) NOT NULL,
+Apellido2 VARCHAR(20) NOT NULL,
+Nombre VARCHAR(20) NOT NULL,
+Nacionalidad VARCHAR(30) NOT NULL,
+Sexo VARCHAR(1) NOT NULL, /*CK ('M','F')*/
+CedulaAlum VARCHAR(13) DEFAULT ('N/T'), /*UQ*/
+Acta VARCHAR(8) NOT NULL,
+Folio VARCHAR(8) NOT NULL,
+Libro VARCHAR(8) NOT NULL,
+Año VARCHAR(4) NOT NULL,
+FechaNac DATE NOT NULL,
+Direccion VARCHAR(200) NOT NULL,
+Provincia VARCHAR(50) NOT NULL,
+Municipio VARCHAR(50) NOT NULL,
+TelResidencial VARCHAR(12),
+TelEmergencia VARCHAR(12) NOT NULL,
+Correo VARCHAR(50),
+NombreMadre VARCHAR(50) NOT NULL,
+CedMadre VARCHAR(13) NOT NULL,
+OcupMadre VARCHAR(40) NOT NULL,
+TelResMadre VARCHAR(12),
+TelCelMadre VARCHAR(12),
+NombrePadre VARCHAR(50) NOT NULL,
+CedPadre VARCHAR(13) NOT NULL,
+OcupPadre VARCHAR(40) NOT NULL,
+TelResPadre VARCHAR(12),
+TelCelPadre VARCHAR(12),
+ConQuienVive VARCHAR(12) NOT NULL,
+NombreTutor VARCHAR(50) NOT NULL,
+CedTutor VARCHAR(13) NOT NULL,
+OcupTutor VARCHAR(40) NOT NULL,
+TelResTutor VARCHAR(12),
+TelCelTutor VARCHAR(12),
+Enfermedades VARCHAR(100) DEFAULT ('N/T'),
+MedUsa VARCHAR(100) DEFAULT ('N/T'),
+Alergias VARCHAR(100) DEFAULT ('N/T'),
+CentroAnt VARCHAR(100),
+GradoAnt VARCHAR(3) NOT NULL,
+GradoRep VARCHAR(3),
+Observacion VARCHAR(200),
+NombrQuienInsc VARCHAR(50),
+EncInscrip VARCHAR(30)
+);
+
+CREATE TABLE Maestros
+(
+  IDMaestro INT AUTO_INCREMENT PRIMARY KEY,
+  Apellido1 VARCHAR(50) NOT NULL,
+  Apellido2 VARCHAR(50) NOT NULL,
+  Nombre VARCHAR(50) NOT NULL,
+  IDAsignatura INT NOT NULL,
+  IDCurso INT
+);
+
+CREATE TABLE Secciones (
+IDSeccion INT AUTO_INCREMENT PRIMARY KEY,
+Seccion VARCHAR(60) NOT NULL
+);
