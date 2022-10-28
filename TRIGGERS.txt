@@ -1,0 +1,379 @@
+USE IPEAM;
+
+
+/*TABLA AESCOLAR*/
+
+DELIMITER $$
+
+CREATE TRIGGER TR_Aescolar_INS
+BEFORE INSERT ON Aescolar
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto un año escolar');
+end $$
+
+CREATE TRIGGER TR_Aescolar_MDF
+BEFORE UPDATE ON Aescolar
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico un año escolar');
+end $$
+
+CREATE TRIGGER TR_Aescolar_DLT
+BEFORE DELETE ON Aescolar
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino un año escolar');
+end $$
+
+/*TABLA ALUMNOS*/
+
+CREATE TRIGGER TR_Alumnos_INS
+BEFORE INSERT ON Alumnos
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto un alumno');
+end $$
+
+CREATE TRIGGER TR_Alumnos_MDF
+BEFORE UPDATE ON Alumnos
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(CURRENT_USER(),NOW(),'Modifico datos de un alumno');
+end $$
+
+CREATE TRIGGER TR_Alumnos_DLT
+BEFORE DELETE ON Alumnos
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino un alumno');
+end $$
+
+/*TABLA ASIGNATURAS*/
+
+CREATE TRIGGER TR_Asignaturas_INS
+BEFORE INSERT ON Asignaturas
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto una asignatura');
+end $$
+
+CREATE TRIGGER TR_Asignaturas_MDF
+BEFORE UPDATE ON Asignaturas
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico una asignatura');
+end $$
+
+CREATE TRIGGER TR_Asignaturas_DLT
+BEFORE DELETE ON Asignaturas
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino una asignatura');
+end $$
+
+/*TABLA CALIFICACIONES_1ER*/
+
+CREATE TRIGGER TR_Calificaciones_1er_Ciclo_INS
+BEFORE INSERT ON Calificaciones_1er_Ciclo
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto una Calificacion');
+end $$
+
+CREATE TRIGGER TR_Calificaciones_1er_Ciclo_MDF
+BEFORE UPDATE ON Calificaciones_1er_Ciclo
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico una Calificacion');
+end $$
+
+CREATE TRIGGER TR_Calificaciones_1er_Ciclo_DLT
+BEFORE DELETE ON Calificaciones_1er_Ciclo
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino una Calificacion');
+end $$
+
+/*TABLA CALIFICACIONSE_2DO_ACAD*/
+
+CREATE TRIGGER TR_Calificaciones_2do_Ciclo_Acad_INS
+BEFORE INSERT ON Calificaciones_2do_Ciclo_Acad
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto una Calificacion');
+end $$
+
+CREATE TRIGGER TR_Calificaciones_2do_Ciclo_Acad_MDF
+BEFORE UPDATE ON Calificaciones_2do_Ciclo_Acad
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico una Calificacion');
+end $$
+
+CREATE TRIGGER TR_Calificaciones_2do_Ciclo_Acad_DLT
+BEFORE DELETE ON Calificaciones_2do_Ciclo_Acad
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino una Calificacion');
+end $$
+
+/*TABLA CALIFICACIONES_2DO_TEC*/
+
+CREATE TRIGGER TR_Calificaciones_2do_Ciclo_Tec_INS
+BEFORE INSERT ON Calificaciones_2do_Ciclo_Tec
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto una Calificacion');
+end $$
+
+CREATE TRIGGER TR_Calificaciones_2do_Ciclo_Tec_MDF
+BEFORE UPDATE ON Calificaciones_2do_Ciclo_Tec
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico una Calificacion');
+end $$
+
+CREATE TRIGGER TR_Calificaciones_2do_Ciclo_Tec_DLT
+BEFORE DELETE ON Calificaciones_2do_Ciclo_Tec
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino una Calificacion');
+end $$
+
+/*TABLA CURSO*/
+
+CREATE TRIGGER TR_Cursos_INS
+BEFORE INSERT ON Cursos
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto un Curso');
+end $$
+
+CREATE TRIGGER TR_Cursos_MDF
+BEFORE UPDATE ON Cursos
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico un Curso');
+end $$
+
+CREATE TRIGGER TR_Cursos_DLT
+BEFORE DELETE ON Cursos
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino un Curso');
+end $$
+
+/*TABLA GRADO*/
+
+CREATE TRIGGER TR_Grados_INS
+BEFORE INSERT ON Grados
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto un Grado');
+end $$
+
+CREATE TRIGGER TR_Grados_MDF
+BEFORE UPDATE ON Grados
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico un Grado');
+end $$
+
+CREATE TRIGGER TR_Grados_DLT
+BEFORE DELETE ON Grados
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino un Grado');
+end $$
+
+/*TABLA HISTORIAL*/
+
+CREATE TRIGGER TR_Historial_MDF
+BEFORE UPDATE ON Historial
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico un Historial');
+end $$
+
+CREATE TRIGGER TR_Historial_DLT
+BEFORE DELETE ON Historial
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino un Historial');
+end $$
+
+/*TABLA MAESTRO*/
+
+CREATE TRIGGER TR_Maestro_INS
+BEFORE INSERT ON Maestros
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto un Maestro');
+end $$
+
+CREATE TRIGGER TR_Maestro_MDF
+BEFORE UPDATE ON Maestros
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico un Maestro');
+end $$
+
+CREATE TRIGGER TR_Maestro_DLT
+BEFORE DELETE ON Maestros
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino un Maestro');
+end $$
+
+/*TABLA SECCIONES*/
+
+CREATE TRIGGER TR_Secciones_INS
+BEFORE INSERT ON Secciones
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto una Seccion');
+end $$
+
+CREATE TRIGGER TR_Secciones_MDF
+BEFORE UPDATE ON Secciones
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico una Seccion');
+end $$
+
+CREATE TRIGGER TR_Secciones_DLT
+BEFORE DELETE ON Secciones
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino una Seccion');
+end $$
+
+
+/*TABLA INSCRIPCION*/
+
+CREATE TRIGGER TR_Inscripcion_INS
+BEFORE INSERT ON Inscripcion
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Inserto una Inscripcion');
+end $$
+
+CREATE TRIGGER TR_Inscripcion_MDF
+BEFORE UPDATE ON Inscripcion
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Modifico una Inscripcion');
+end $$
+
+CREATE TRIGGER TR_Inscripcion_DLT
+BEFORE DELETE ON Inscripcion
+for each row
+begin
+INSERT INTO Historial
+(Usuario,Fecha,Accion)
+VALUES
+(SYSTEM_USER(),NOW(),'Elimino una Inscripcion');
+end $$
