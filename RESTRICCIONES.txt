@@ -1,0 +1,219 @@
+USE IPEAM;
+
+CREATE INDEX IX_Grados_Grado ON IPEAM.Grados (Grado);
+
+CREATE INDEX IX_Secciones_Seccion ON IPEAM.Secciones (Seccion);
+
+/*TABLA ALUMNOS*/
+
+ALTER TABLE Alumnos ADD CONSTRAINT
+FK_ALUMNOS_AESCOLAR FOREIGN KEY (Aescolar)
+REFERENCES Aescolar (Aescolar);
+
+ALTER TABLE Alumnos ADD CONSTRAINT
+FK_ALUMNOS_IDCURSO FOREIGN KEY (IDCurso)
+REFERENCES Cursos (IDCurso);
+
+ALTER TABLE Alumnos ADD CONSTRAINT
+FK_Alumnos_IDAlumno FOREIGN KEY
+(IDAlumno) REFERENCES Inscripcion
+(IDAlumno);
+
+ALTER TABLE Alumnos ADD CONSTRAINT
+CHK_Alumnos_Numero CHECK (Numero > 0);
+
+/*TABLA ASIGNATURAS*/
+
+ALTER TABLE Asignaturas ADD CONSTRAINT
+CHK_Asignaturas_Tipo CHECK ( Tipo in ('Academica','Tecnica') );
+
+ALTER TABLE Asignaturas ADD CONSTRAINT
+FK_Asignaturas_IDGrado FOREIGN KEY
+(IDGrado) REFERENCES Grados (IDGrado);
+
+ALTER TABLE Asignaturas ADD CONSTRAINT
+FK_Asignaturas_IDSeccion FOREIGN KEY
+(IDSeccion) REFERENCES Secciones (IDSeccion);
+
+/*TABLA Calificaciones_1er_Ciclo*/
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT FK_calificaciones_1er_ciclo_IDAlumno
+FOREIGN KEY (IDAlumno) REFERENCES Alumnos (IDAlumno);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT FK_calificaciones_1er_ciclo_Aescolar
+FOREIGN KEY (Aescolar) REFERENCES Aescolar (Aescolar);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT FK_calificaciones_1er_ciclo_IDCurso
+FOREIGN KEY (IDCurso) REFERENCES Cursos (IDCurso);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT FK_calificaciones_1er_ciclo_IDAsignatura
+FOREIGN KEY (IDAsignatura) REFERENCES Asignaturas (IDAsignatura);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT CHK_calificaciones_1er_ciclo_N1
+CHECK ( N1 > 0);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT CHK_calificaciones_1er_ciclo_N2
+CHECK ( N2 > 0);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT CHK_calificaciones_1er_ciclo_N3
+CHECK ( N3 > 0);
+
+ALTER TABLE calificaciones_1er_ciclo 
+ADD CONSTRAINT CHK_calificaciones_1er_ciclo_N4
+CHECK ( N4 > 0);
+
+/*TABLA Calificaciones_2do_Ciclo_Acad*/
+
+ALTER TABLE calificaciones_2do_ciclo_Acad
+ADD CONSTRAINT FK_calificaciones_2do_ciclo_Acad_IDAlumno
+FOREIGN KEY (IDAlumno) REFERENCES Alumnos (IDAlumno);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad 
+ADD CONSTRAINT FK_calificaciones_2do_ciclo_Acad_Aescolar
+FOREIGN KEY (Aescolar) REFERENCES Aescolar (Aescolar);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad
+ADD CONSTRAINT FK_calificaciones_2do_ciclo_Acad_IDCurso
+FOREIGN KEY (IDCurso) REFERENCES Cursos (IDCurso);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad 
+ADD CONSTRAINT FK_calificaciones_2do_ciclo_Acad_IDAsignatura
+FOREIGN KEY (IDAsignatura) REFERENCES Asignaturas (IDAsignatura);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad 
+ADD CONSTRAINT CHK_calificaciones_2do_ciclo_Acad_N1
+CHECK ( N1 > 0);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad 
+ADD CONSTRAINT CHK_calificaciones_2do_ciclo_Acad_N2
+CHECK ( N2 > 0);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad 
+ADD CONSTRAINT CHK_calificaciones_2do_ciclo_Acad_N3
+CHECK ( N3 > 0);
+
+ALTER TABLE calificaciones_2do_ciclo_Acad
+ADD CONSTRAINT CHK_calificaciones_2do_ciclo_Acad_N4
+CHECK ( N4 > 0);
+
+/*TABLA Calificaciones_2do_Ciclo_Tec*/
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec
+ADD CONSTRAINT FK_Calificaciones_2do_Ciclo_Tec_IDAlumno
+FOREIGN KEY (IDAlumno) REFERENCES Alumnos (IDAlumno);
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec
+ADD CONSTRAINT FK_Calificaciones_2do_Ciclo_Tec_Aescolar
+FOREIGN KEY (Aescolar) REFERENCES Aescolar (Aescolar);
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec
+ADD CONSTRAINT FK_Calificaciones_2do_Ciclo_Tec_IDCurso
+FOREIGN KEY (IDCurso) REFERENCES Cursos (IDCurso);
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec
+ADD CONSTRAINT FK_Calificaciones_2do_Ciclo_Tec_IDAsignatura
+FOREIGN KEY (IDAsignatura) REFERENCES Asignaturas (IDAsignatura);
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE1
+CHECK (GCE1 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE2
+CHECK (GCE2 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE3
+CHECK (GCE3 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE4
+CHECK (GCE4 IN ('G','C','E'));
+
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE5
+CHECK (GCE5 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE6
+CHECK (GCE6 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE7
+CHECK (GCE7 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCE8
+CHECK (GCE8 IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_VxU
+CHECK (((VxU1) + (VxU2) + (VxU3) + (VxU4) + (VxU5) + (VxU6) + (VxU7) + (VxU8)) <= (100));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec 
+ADD CONSTRAINT CHK_Calificaciones_2do_Ciclo_Tec_GCEG
+CHECK (GCEG IN ('G','C','E'));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA1 CHECK (((RA1 >= 0) and (RA1 <= VxU1)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA2 CHECK (((RA2 >= 0) and (RA2 <= VxU2)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA3 CHECK (((RA3 >= 0) and (RA3 <= VxU3)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA4 CHECK (((RA4 >= 0) and (RA4 <= VxU4)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA5 CHECK (((RA5 >= 0) and (RA5 <= VxU5)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA6 CHECK (((RA6 >= 0) and (RA6 <= VxU6)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA7 CHECK (((RA7 >= 0) and (RA7 <= VxU7)));
+
+ALTER TABLE Calificaciones_2do_Ciclo_Tec ADD CONSTRAINT CHK_Calificaciones_2do_Tec_RA8 CHECK (((RA8 >= 0) and (RA8 <= VxU8)));
+
+/*TABLA CURSOS*/
+
+ALTER TABLE Cursos ADD CONSTRAINT FK_Cursos_Aescolar
+FOREIGN KEY (Aescolar) REFERENCES Aescolar (Aescolar);
+
+ALTER TABLE Cursos ADD CONSTRAINT FK_Cursos_Grado
+FOREIGN KEY (Grado) REFERENCES Grados (Grado);
+
+ALTER TABLE Cursos ADD CONSTRAINT FK_Cursos_Seccion
+FOREIGN KEY (Seccion) REFERENCES Secciones (Seccion);
+
+/*TABLA INSCRIPCION*/
+
+ALTER TABLE Inscripcion ADD CONSTRAINT
+FK_Inscripcion_Aescolar FOREIGN KEY
+(Aescolar) REFERENCES Aescolar
+(Aescolar);
+
+ALTER TABLE Inscripcion ADD CONSTRAINT
+FK_Inscripcion_IDGrado FOREIGN KEY
+(IDGrado) REFERENCES Grados (IDGrado);
+
+ALTER TABLE Inscripcion ADD CONSTRAINT
+FK_Inscripcion_IDSeccion FOREIGN KEY
+(IDSeccion) REFERENCES Secciones (IDSeccion);
+
+ALTER TABLE Inscripcion ADD CONSTRAINT
+CHK_Inscripcion_Sexo CHECK (Sexo in ('M','F'));
+
+ALTER TABLE Inscripcion ADD CONSTRAINT
+UQ_Inscripcion_CedulaAlum UNIQUE (CedulaAlum);
+
+/*TABLA MAESTROS*/
+
+ALTER TABLE Maestros ADD CONSTRAINT FK_Maestro_IDAsignaturas
+FOREIGN KEY (IDAsignatura) REFERENCES Asignaturas (IDAsignatura);
+
+ALTER TABLE Maestros ADD CONSTRAINT FK_MAESTRO_IDCURSO
+FOREIGN KEY (IDCurso) REFERENCES Cursos (IDCurso);
